@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Deliver </title>
+    <style>
+        .class_a{
+            border: 1px solid black;
+            padding: 1px;
+        }
+        .img_cust{
+          height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <a  href="{% url 'logout' %}"  > Logout</a>
+  
+        <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Customer_Name</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>zip_code</th>
+                <th>Paid</th>
+              </tr>
+            </thead>
+        <tbody>
+        <ul>
+        {% for item in my_data %}
+        <tr>
+          <td class="class_a">{{ item.created_on }}</td>
+          <td class="class_a">{{ item.price }}</td>
+          <td class="class_a">{{ item.name }}</td>
+          <td class="class_a">{{ item.email }}</td>
+          <td class="class_a">{{ item.street }}</td>
+          <td class="class_a">{{ item.city }}</td>
+          <td class="class_a">{{ item.state }}</td>
+          <td class="class_a">{{ item.zip_code }}</td>
+
+          {% if item.is_paid == False %}
+          <td class="class_a"><img class="img_cust" src="https://www.svgrepo.com/show/17358/wrong.svg" alt="img"></td>
+          {% else %}
+          <td class="class_a"> <img class="img_cust" src="https://www.svgrepo.com/show/15370/correct.svg" alt="img"></td>
+          {% endif %}
+          <td> <a href="{% url 'delete' item.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </ul>
+        </thead>
+        </table>
+</body>
+</html>
